@@ -2069,11 +2069,11 @@ fieldset:disabled a.btn {
   pointer-events: none; }
 
 .btn-primary {
-  color: #fff;
+  color: #ff1493;
   background-color: #007bff;
   border-color: #007bff; }
   .btn-primary:hover {
-    color: #fff;
+    color: #ff1493;
     background-color: #0069d9;
     border-color: #0062cc; }
   .btn-primary:focus, .btn-primary.focus {
@@ -8215,7 +8215,7 @@ h1, h2, h3, h4, h5,
       font-size: 40px; } }
 
 .slider-text .subheading {
-  font-size: 18px;
+  font-size: 25px;
   font-style: italic;
   color: rgba(255, 255, 255, 0.7); }
 
@@ -8356,8 +8356,8 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #eac15a !important;
-    border: 1px solid #eac15a !important;
+    background: #FF1493 !important;
+    border: 1px solid #FF1493 !important;
     color: #fff !important; }
     .btn.btn-primary:hover {
       border: 1px solid #eac15a;
@@ -8954,19 +8954,6 @@ textarea.form-control {
   color: rgba(0, 0, 0, 0.7);
   margin-bottom: 10px; }
 
-.ftco-counter .icon-video {
-  width: 100px;
-  height: 100px;
-  background: #eac15a;
-  -webkit-animation: pulse 2s infinite;
-  animation: pulse 2s infinite;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%; }
-  .ftco-counter .icon-video span {
-    font-size: 30px;
-    color: #2c2f3a; }
 
 .ftco-counter .icon {
   width: 70px;
