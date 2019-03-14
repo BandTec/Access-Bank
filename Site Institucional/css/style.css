@@ -1081,15 +1081,12 @@ pre {
     max-width: 100%; }
 	 .col-lg-13 {
     -webkit-box-flex: 0;
-    ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 25%; 
-	margin: 0;
-    position: absolute;
-    top: 110%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) }
+    -ms-flex: 0 0 100%;
+    flex: 0 0 25%;
+    top: 100%;
+    left: 38%;
+
+    max-width: 100%;}
   .order-lg-first {
     -webkit-box-ordinal-group: 0;
     -ms-flex-order: -1;
@@ -8568,11 +8565,11 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 10em 0;
-  position: relative; }
+  padding: 3em 0em;
+   }
   @media (max-width: 900.00px) {
     .ftco-section {
-      padding: 6em 0; } }
+      padding: 10em 0%; } }
 		
 .ftco-bg-dark {
   background: #3c312e; }
