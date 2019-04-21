@@ -6,7 +6,7 @@ var ensureLoggedOut = require('connect-ensure-login').ensureLoggedOut;
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.render('dashboard', { message: null });
+  res.render('login', { message: null });
 });
 
 
@@ -20,7 +20,7 @@ router.get('/login',ensureLoggedOut('/incubadoras'), function (req, res) {
 router.post('/login',
   passport.authenticate('local', { failureRedirect: '/login' }),
   function (req, res) {
-    res.redirect('/incubadoras');
+    res.render('dashboard');
   });
 
   //Desloga do sistema

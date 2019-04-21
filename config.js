@@ -1,8 +1,8 @@
 const config = {
-    user: 'lucas',
-    password: 'Projetosensor2',
-    server: 'projetosensor.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
-    database: 'lucasdatabase',
+    user: 'rodolfogregorio',
+    password: 'Access@bank',
+    server: 'abankserver.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
+    database: 'accessbank',
 
     options: {
         encrypt: true // Use this if you're on Windows Azure

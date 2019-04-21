@@ -10683,6 +10683,12 @@ a:focus {
   background-color: #113b42;
   background-size: cover;
 }
+.bg-gradient-login{
+
+  background-color: #64777a;
+  background-size: cover;
+  
+}
 
 .bg-gradient-success {
   background-color: #1cc88a;
@@ -10793,7 +10799,7 @@ a:focus {
 }
 
 .text-gray-900 {
-  color: #3a3b45 !important;
+  color: whitesmoke !important;
 }
 
 .icon-circle {
@@ -11597,7 +11603,7 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v112-fah-16-city_2_1.jpg?auto=format&bg=F4F4F3&con=3&cs=srgb&dpr=1&fm=jpg&ixlib=php-1.1.0&mark=rawpixel-watermark.png&markalpha=90&markpad=13&markscale=10&markx=25&q=75&usm=15&vib=3&w=1200&s=cf574927128da2c35e1c02e1e3065306");
   background-position: center;
   background-size: cover;
 }

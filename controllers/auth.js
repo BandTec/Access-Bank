@@ -26,7 +26,7 @@ module.exports = function (passport) {
     },
         (username, password, done) => {
 
-            global.conn.request().query`select top (1) idUsuario, senha  from usuario where email = ${username} order by idUsuario desc`
+            global.conn.request().query`select top (1) usuarioId, senha  from usuario where email = ${username} order by usuarioId desc`
             .then(usuario => {
 
                 //Verifica se retornou alguma usuario
@@ -37,14 +37,14 @@ module.exports = function (passport) {
                 
 
                // Descriptografa a senha 
-                let senhaDescript = cryptr.decrypt(user.senha);
+                // let senhaDescript = cryptr.decrypt(user.senha);
         
                 // comparando as senhas
-                if (senhaDescript != password) 
+                if (user.senha != password) 
                     return done(null, false)               
 
                 // caso não entrar nos ifs anteriores retorna o usuário
-                return done(null, user.idUsuario)
+                return done(null, user.usuarioId)
 
             }).catch(err => {
                 // Se der algum erro imprime no console
