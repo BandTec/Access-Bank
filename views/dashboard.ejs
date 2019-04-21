@@ -1,0 +1,428 @@
+<%- include('headerLayout.ejs')%>
+<style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+          height: 100%;
+          width: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+</style>
+  
+
+<div class="row">
+<div class="col-xl-8 col-lg-7">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Incidentes áreas</h6>
+        <div class="dropdown no-arrow">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-header">Dropdown Header:</div>
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-area">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Incidentes Levels</h6>
+            <div class="dropdown no-arrow">
+              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="chart-pie pt-4 pb-2">
+              <canvas id="pieChart"></canvas>
+            </div>
+            <div class="mt-4 text-center small">
+              <span class="mr-2">
+                <i class="fas fa-circle text-primary"></i> Hign
+              </span>
+              <span class="mr-2">
+                <i class="fas fa-circle text-success"></i> Medium
+              </span>
+              <span class="mr-2">
+                <i class="fas fa-circle text-info"></i> Low
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+ </div> 
+
+ <!-- Card Map-->
+ <div class="row">
+        <div class="col-xl-12 col-lg-12">
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Incidentes áreas</h6>
+                    <div class="dropdown no-arrow">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div class="chart-areaMap">
+                        <div id="map"></div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+
+ </div>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Norte', 'Sul', 'Leste', 'Oeste'],
+        datasets: [{
+            label: 'São Paulo',
+            data: [12, 19, 3, 5],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+            fontColor: 'white'
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: "white"
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                   fontColor: "white",
+                }
+             }]
+        },
+        legend: {
+            labels: {
+               fontColor: 'white'
+            }
+         },
+    }
+});
+
+
+</script>
+
+<script>
+
+// Pie Chart Example
+var ctx = document.getElementById("pieChart");
+var myPieChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["Hign", "Medium", "Low"],
+    datasets: [{
+      data: [55, 30, 15],
+      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      hoverBorderColor: "rgba(234, 236, 244, 1)",
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    tooltips: {
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+    },
+    legend: {
+      display: false,
+      fontColor: 'white'
+    },
+    cutoutPercentage: 80,
+  },
+  yAxes: [{
+    ticks: {
+        beginAtZero: true,
+        fontColor: "white"
+    }
+}],
+xAxes: [{
+    ticks: {
+       fontColor: "white",
+    }
+ }]
+}
+);
+</script>
+
+<script>
+        var map;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -23.5521232, lng: -46.6375192 },
+            zoom: 10,
+            styles: [
+            {
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#212121"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#212121"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.country",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.locality",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#bdbdbd"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#181818"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#1b1b1b"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#2c2c2c"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#8a8a8a"
+                }
+              ]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#373737"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#3c3c3c"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway.controlled_access",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#4e4e4e"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "featureType": "transit",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#3d3d3d"
+                }
+              ]
+            }
+          ]
+
+          });
+
+          
+        var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
+        makers.forEach((item, index)=>{
+
+            var marker = new google.maps.Marker({position: item, map: map});
+        })
+
+        
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYXLzq0gYARRSJ7b97GVqH5G2COSZRH70&callback=initMap"
+      async defer></script>
+  
+
+<%- include('footerLayout.ejs')%>

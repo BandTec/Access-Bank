@@ -1,31 +1,58 @@
-const express = require('express')
+const createError = require('http-errors');
+const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const passport = require('passport');
 const session = require('express-session');
+const cors = require('cors');
+require('./controllers/auth')(passport);
+const sessionRouter = require('./controllers/session');
+const usersRouter = require('./controllers/users');
+const incubadorasRouter = require('./controllers/incubadoras');
+const medicaoRouter = require('./controllers/medicao');
+const recemNasc = require('./controllers/recemNasc');
 
-//Requisição de arquivos de rotas
-const indexRouter = require('./routers/index')
+const app = express();
+app.use(cors());
 
-app = express()
+app.use(session({
+  secret: '123', // configure um segredo seu aqui
+  resave: false,
+  saveUninitialized: false,
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
-
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(session({ resave: true,
-    saveUninitialized: true,
-    secret: '123' }));
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', sessionRouter);
+app.use('/users', usersRouter);
+app.use('/incubadoras', incubadorasRouter);
+app.use('/medicao', medicaoRouter);
+app.use('/recemNasc', recemNasc);
 
-app.use('/', indexRouter)
 
+// catch 404 and forward to error handler
+// app.use((req, res, next) => {
+//   next(createError(404));
+// });
 
-app.listen(3000, function() {
-    console.log('App executando na porta 3000!');
-  });
+// // error handler
+// app.use((err, req, res) => {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
+module.exports = app;
