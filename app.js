@@ -8,7 +8,7 @@ const cors = require('cors');
 require('./controllers/auth')(passport);
 const sessionRouter = require('./controllers/session');
 const usersRouter = require('./controllers/users');
-const incubadorasRouter = require('./controllers/incubadoras');
+const agenciaRouter = require('./controllers/agencias');
 const medicaoRouter = require('./controllers/medicao');
 const recemNasc = require('./controllers/recemNasc');
 
@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', sessionRouter);
 app.use('/users', usersRouter);
-app.use('/incubadoras', incubadorasRouter);
+app.use('/agencias', agenciaRouter);
 app.use('/medicao', medicaoRouter);
 app.use('/recemNasc', recemNasc);
 

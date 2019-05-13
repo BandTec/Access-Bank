@@ -1,0 +1,88 @@
+<%- include('../headerLayout.ejs')%>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Adicionando Agência</h1>
+    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+  </div> 
+
+ 
+<div class="row" style="margin: 0 auto;">
+
+
+    
+<form action="/agencias/create" method="POST">
+    <div class="form-row">
+      <div class="form-group col-md-6" >
+        <label for="inputEmail4">Número da agência</label>
+        <input name="numeroagencia" type="text" class="form-control" id="inputEmail4" placeholder="Agência n°" required>
+      </div>
+ 
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-10">
+      <label for="inputAddress">Endereço</label>
+      <input name="endereco" type="text" class="form-control" id="inputAddress" placeholder="Rua Marechal.." required>
+    </div>
+    <div class="form-group col-md-2">
+        <label for="inputZip">N°</label>
+        <input name="numero" type="text" class="form-control" id="inputZip" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">Cidade</label>
+        <input type="text" name="cidade" class="form-control" id="inputCity" required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">Estado</label>
+        <select name="estado" id="inputState" class="form-control">
+        
+          <option value="AC" selected>Acre</option>
+	<option value="AL">Alagoas</option>
+	<option value="AP">Amapá</option>
+	<option value="AM">Amazonas</option>
+	<option value="BA">Bahia</option>
+	<option value="CE">Ceará</option>
+	<option value="DF">Distrito Federal</option>
+	<option value="ES">Espírito Santo</option>
+	<option value="GO">Goiás</option>
+	<option value="MA">Maranhão</option>
+	<option value="MT">Mato Grosso</option>
+	<option value="MS">Mato Grosso do Sul</option>
+	<option value="MG">Minas Gerais</option>
+	<option value="PA">Pará</option>
+	<option value="PB">Paraíba</option>
+	<option value="PR">Paraná</option>
+	<option value="PE">Pernambuco</option>
+	<option value="PI">Piauí</option>
+	<option value="RJ">Rio de Janeiro</option>
+	<option value="RN">Rio Grande do Norte</option>
+	<option value="RS">Rio Grande do Sul</option>
+	<option value="RO">Rondônia</option>
+	<option value="RR">Roraima</option>
+	<option value="SC">Santa Catarina</option>
+	<option value="SP">São Paulo</option>
+	<option value="SE">Sergipe</option>
+<option value="TO">Tocantins</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Cep</label>
+        <input type="text" class="form-control" name="cep" id="inputZip" required>
+      </div>
+    </div>
+    <div style="text-align:center">
+    <div class="form-group">
+    
+    </div>
+    <button type="submit" class="btn btn-success">Adicionar</button>
+    <a href="/agencias" class="btn btn-secondary">Cancelar</a>
+    
+    
+</div>
+  </form>
+
+
+</div>
+<br>
+<%- include('../footerLayout.ejs')%>

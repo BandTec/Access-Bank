@@ -90,5 +90,8 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-}).catch (() => { })
+}).catch ((err) => {
+
+  console.log(err)
+ })
 
