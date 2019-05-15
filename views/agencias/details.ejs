@@ -1,17 +1,23 @@
 <%- include('../headerLayout.ejs')%>
+<% if(mensagem != null){%>
+  <div id="addAlert" class="alert alert-dark fade show alert-dismissible" role="alert">
+      Caixa cadastrado com sucesso!
+  </div>
+<%}%>
+
 
 <div class="row">
 
-  <div class="col col-md-6">
+  <div class="col col-md-12">
 
 
     <div class="card">
-      <h5 class="card-header" style="color: aqua">Agencia</h5>
+      <h5 style="text-align:center"  class="card-header" style="color: aqua">Agência</h5>
       <div class="card-body">
       <h5 class="card-title">Informações:</h5>
       <p class="card-text">          
           Agencia Número: <%= agencias[0].agencia_nn%> <br>
-          Endereço: <%= agencias[0].agencia_end%>
+          Endereço: <%= agencias[0].agencia_end%> &nbsp; N°: <%= agencias[0].agencia_end_nn%><br>
           Cidade: <%= agencias[0].agencia_cid%> <br>
           Estado: <%= agencias[0].agencia_est%> <br>
 
@@ -26,12 +32,12 @@
   <hr >
   
   <br>
-  <div class="card" >
+  <div class="card" style="text-align:center" >
       <h5 class="card-header" style="color: aqua" style="text-align:center">Caixas</h5>
       
   </div>
   <br>
-<a style="text-align:right" class="btn btn-secondary"> Novo Caixa</a>
+<a href="/caixas/create/<%=agencias[0].agencia_id %>" style="text-align:right" class="btn btn-secondary"> Novo Caixa</a>
 <br><br>
 
 <div class="row">
@@ -45,16 +51,18 @@
                    
                 </h4>
                 <p class="card-text">
-                    <form action="/agencias/details/<%= data.agencia_id %>" method="GET"> 
+                    <form action="/caixas/details/<%= data.caixaId %>" method="GET"> 
                         
-                        <label><b style="color: beige;">Numero:</b></label>
-                                       <label><%=data.agencia_nn%></label>
+                        <label><b style="color: beige;">Número Serial:</b></label>
+                                       <label><%=data.caixaId%></label>
                                         <br> 
-                        <label><b style="color: beige;">Cidade:</b></label>
-                                        <label><%=data.agencia_cid%></label>
-                                         <br> 
-                        <label><b style="color: beige;">Estado:</b></label>
-                                         <label><%=data.agencia_est%></label>
+                      
+                        <label><b style="color: beige;">Configurado ?:</b></label>
+                                          <% if(data.configurado == 1){%>
+                                            <label>SIM></label>
+                                            <%}else{%>
+                                              <label>Não</label>
+                                              <%}%>
                                           <br> 
                         
                         
@@ -75,4 +83,11 @@
   </div>
 
   <br><br>
+
+  <script>
+
+    setTimeout(function() {
+        $('#addAlert').fadeOut('slow');}, 3000
+      );
+</script>
   <%- include('../footerLayout.ejs')%>

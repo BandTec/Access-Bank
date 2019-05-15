@@ -9,6 +9,7 @@ require('./controllers/auth')(passport);
 const sessionRouter = require('./controllers/session');
 const usersRouter = require('./controllers/users');
 const agenciaRouter = require('./controllers/agencias');
+const caixaRouter = require('./controllers/caixas');
 const medicaoRouter = require('./controllers/medicao');
 const recemNasc = require('./controllers/recemNasc');
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', sessionRouter);
 app.use('/users', usersRouter);
 app.use('/agencias', agenciaRouter);
+app.use('/caixas', caixaRouter);
 app.use('/medicao', medicaoRouter);
 app.use('/recemNasc', recemNasc);
 

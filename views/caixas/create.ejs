@@ -1,0 +1,60 @@
+
+
+<%- include('../headerLayout.ejs')%>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Adicionando Agência</h1>
+    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+  </div> 
+
+ 
+<div class="row" style="margin: 0 auto;">
+
+
+    
+<form action="/caixas/create/" method="POST">
+    <div class="form-row">
+      <div class="form-group col-md-6" >
+        <label for="inputEmail4">Número Serial</label>
+        <input name="numeroserial" type="text" class="form-control" id="inputEmail4" placeholder="Agência n°" required>
+      </div>
+ 
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-10">
+      <label for="inputAddress">Descrição</label>
+      <br>
+      <textarea name="descricao" rows="4" cols="70">
+
+      </textarea>
+    </div>
+
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-10">
+      <label for="inputAddress">Agencia</label>
+      <br>
+        <input name="agencia_id" value="<%=agencia_id%>" type="text">
+
+      </textarea>
+    </div>
+
+    
+  </div>
+
+        
+       
+    <div style="text-align:center">
+   
+    <button type="submit" class="btn btn-success">Adicionar</button>
+    <a href="/agencias/details/<%=agencia_id%>" class="btn btn-secondary">Cancelar</a>
+    
+    
+</div>
+  </form>
+
+
+</div>
+<br>
+<%- include('../footerLayout.ejs')%>
