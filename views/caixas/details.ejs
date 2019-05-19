@@ -32,13 +32,53 @@
 
 <!--DashBoard-->
 
-<!-- CPU-->
+
 <div class="row">
-<div class="col-xl-6 col-lg-6">
+
+  <!-- OS CHART-->
+    <div class="col-xl-5 col-lg-5">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Sistema: <%=caixa[0].os_nome%></h6>
+            <div class="dropdown no-arrow">
+              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="chart-pie pt-4 pb-2">
+             
+              <canvas id="osChart"></canvas>
+            </div>
+
+            <div class="mt-4 text-center small">
+                <span id="osData" class="mr-2">
+                  
+                </span>
+                
+               
+              </div>
+         
+          </div>
+        </div>
+      </div>
+
+<!-- CPU-->
+<div class="col-xl-7 col-lg-7">
   <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-      <h6 class="m-0 font-weight-bold text-primary">Uso da cpu</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Uso: <%=caixa[0].cpu_nome%></h6>
       <div class="dropdown no-arrow">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -57,43 +97,99 @@
       <div class="chart-pie pt-4 pb-2">
         <canvas id="myChart"></canvas>
       </div>
-   
+      <div class="mt-4 text-center small">
+          <span id="cpuData" class="mr-2">
+            
+          </span>
+          
+         
+        </div>
     </div>
   </div>
 </div>
+</div>
 
 
-<!-- Memoria-->
-<div class="col-xl-6 col-lg-6">
-  <div class="card shadow mb-4">
-    <!-- Card Header - Dropdown -->
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-      <h6 class="m-0 font-weight-bold text-primary">Uso da memória </h6>
-      <div class="dropdown no-arrow">
-        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-          <div class="dropdown-header">Dropdown Header:</div>
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+
+
+<div class="row">
+  <!-- Memoria-->
+
+    <div class="col-xl-7 col-lg-7">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Memória Total: <%=caixa[0].memoria_total%>MB</h6>
+            <div class="dropdown no-arrow">
+              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="chart-pie pt-4 pb-2">
+              <canvas id="memChart"></canvas>
+            </div>
+            <div class="mt-4 text-center small">
+                <span id="memData" class="mr-2">
+                  
+                </span>
+                
+               
+              </div>
+           
+          </div>
+        </div>
+      </div>
+      
+      
+    <!--Disco Chart-->  
+  <div class="col-xl-5 col-lg-5">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Disco Total: <%=caixa[0].disco_tamanho%></h6>
+        <div class="dropdown no-arrow">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-header">Dropdown Header:</div>
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="discoChart"></canvas>
+        </div>
+        <div class="mt-4 text-center small">
+          <span class="mr-2">
+            <i class="fas fa-circle text-primary"></i> Livre
+          </span>
+          <span class="mr-2">
+            <i class="fas fa-circle text-success"></i> Usado
+          </span>
+         
         </div>
       </div>
     </div>
-    <!-- Card Body -->
-    <div class="card-body">
-      <div class="chart-pie pt-4 pb-2">
-        <canvas id="memChart"></canvas>
-      </div>
-     
-    </div>
   </div>
-</div>
 </div> 
-</div>
-</div>
+  <!--Char aqui-->
+
 <script>
   var ctx = document.getElementById('myChart').getContext('2d');
   var cpuChart = new Chart(ctx, {
@@ -136,7 +232,7 @@
   var memChart = new Chart(ctx, {
       type: 'line',
       data: {
-
+        
           datasets: [{
             borderWidth: 5,
             label: "Memoria",
@@ -168,7 +264,107 @@
            },
       }
   });
-  
+
+
+  // Disco Chart
+var ctx = document.getElementById("discoChart");
+var discoChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["Livre", "Usado"],
+    datasets: [{
+      
+      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      hoverBorderColor: "rgba(234, 236, 244, 1)",
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    tooltips: {
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+    },
+    legend: {
+      display: false,
+      fontColor: 'white'
+    },
+    cutoutPercentage: 80,
+  },
+  yAxes: [{
+    ticks: {
+        beginAtZero: true,
+        fontColor: "white"
+    }
+}],
+xAxes: [{
+    ticks: {
+       fontColor: "white",
+    }
+ }]
+}
+);
+
+//Os Chart
+
+var ctx = document.getElementById('osChart').getContext('2d');
+var osChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ['Processos', 'Threads'],
+        datasets: [{
+            label: '',
+           
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+            fontColor: 'white'
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: "white"
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                   fontColor: "white",
+                }
+             }]
+        },
+        legend: {
+            labels: {
+               fontColor: 'white'
+            }
+         },
+    }
+});
+
+
+
   
   //Obtem medição
 
@@ -182,7 +378,10 @@
 						memChart.data.datasets[0].data.shift();
 					}
             let time = data.medicao_data 
-            time = time.slice(0,10)     
+            time = time.slice(0,10)   
+            document.getElementById('memData').innerHTML = time;  
+            document.getElementById('cpuData').innerHTML = time;
+            document.getElementById('osData').innerHTML = time;
 					 cpuChart.data.labels.push(data.medicao_hora);
 					memChart.data.labels.push(data.medicao_hora);
                     
@@ -194,9 +393,25 @@
           cpuChart.data.datasets[0].data.push(parseFloat(data.cpu_uso));
          //cpuChart.data.datasets[0].data.labels.push(time)
 					memChart.data.datasets[0].data.push(parseFloat(data.mem_uso));
-					
+          let discoTotal = '<%=caixa[0].disco_tamanho%>'
+          let discoLivre = data.disco_livre;
+          discoLivre = parseInt(discoLivre.slice(0,3))
+          discoTotal = parseInt(discoTotal.slice(0,3))
+          let discoUsado = discoTotal - discoLivre;
+          
+          console.log(discoTotal)
+          discoChart.data.datasets[0].data = []
+         discoChart.data.datasets[0].data.push(parseFloat(discoLivre));
+          discoChart.data.datasets[0].data.push(parseFloat(discoUsado));
+
+          osChart.data.datasets[0].data = []
+          osChart.data.datasets[0].data.push(parseFloat(data.os_processos));
+          osChart.data.datasets[0].data.push(parseFloat(data.os_threads));
+
 					cpuChart.update();
-					memChart.update();
+          memChart.update();
+          discoChart.update();
+          osChart.update();
 				//	alerta(data);
 					
 					

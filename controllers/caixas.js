@@ -66,7 +66,7 @@ var router = express.Router();
 router.get('/medicao/:id',  function (req, res) {
   let caixa_id = req.params.id
 
-  console.log(caixa_id)
+
 
   global.conn.request().query`select Top(1) * from medicao where fk_caixa = ${caixa_id} order by medicao_id desc; `
     .then(result => {
