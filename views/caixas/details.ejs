@@ -1,0 +1,219 @@
+
+<%- include('../headerLayout.ejs')%>
+
+<div class="row">
+
+<div class="col col-md-12">
+
+
+  <div class="card">
+    <h5 style="text-align:center"  class="card-header" style="color: aqua">Caixa</h5>
+    <div class="card-body">
+    <h5 class="card-title">Informações:</h5>
+    <p class="card-text">          
+        Número Serial: <label for=""><%=caixa[0].caixa_nn_serial%> </label><br>
+        Configurado ?:  <% if(caixa[0].caixa_configurado == 1){%>
+          SIM
+          <%}else{%>
+          Não
+          <%}%><br>
+        Descrição: <%=caixa[0].caixa_desc%> <br>
+        
+
+    </p>
+  </div>
+</div>
+</div>
+
+</div>
+
+<hr >
+
+
+<!--DashBoard-->
+
+<!-- CPU-->
+<div class="row">
+<div class="col-xl-6 col-lg-6">
+  <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">Uso da cpu</h6>
+      <div class="dropdown no-arrow">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-header">Dropdown Header:</div>
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="chart-pie pt-4 pb-2">
+        <canvas id="myChart"></canvas>
+      </div>
+   
+    </div>
+  </div>
+</div>
+
+
+<!-- Memoria-->
+<div class="col-xl-6 col-lg-6">
+  <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">Uso da memória </h6>
+      <div class="dropdown no-arrow">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-header">Dropdown Header:</div>
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="chart-pie pt-4 pb-2">
+        <canvas id="memChart"></canvas>
+      </div>
+     
+    </div>
+  </div>
+</div>
+</div> 
+</div>
+</div>
+<script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var cpuChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          datasets: [{
+            borderWidth: 5,
+            label: "CPU",
+            pointStyle: "rectRounded",
+            type: 'line',
+            borderColor: 'rgb(230,230,250)',
+            pointBackgroundColor: 'rgb(249, 59, 59)',
+            fill: false
+          }]
+        },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      fontColor: "white"
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                     fontColor: "white",
+                  }
+               }]
+          },
+          legend: {
+              labels: {
+                 fontColor: 'white'
+              }
+           },
+      }
+  });
+
+
+  var ctx = document.getElementById('memChart').getContext('2d');
+  var memChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+
+          datasets: [{
+            borderWidth: 5,
+            label: "Memoria",
+            pointStyle: "rectRounded",
+            type: 'line',
+            borderColor: 'rgb(211,211,211)',
+            pointBackgroundColor: 'rgb(249, 59, 59)',
+            fill: false
+          }]
+        },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      fontColor: "white"
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                     fontColor: "white",
+                  }
+               }]
+          },
+          legend: {
+              labels: {
+                 fontColor: 'white'
+              }
+           },
+      }
+  });
+  
+  
+  //Obtem medição
+
+    function get_data() {
+			fetch('/caixas/medicao/1',{method:'get'}).then(function (response) {
+				response.json().then(function (data) {
+					if (cpuChart.data.labels.length == 9 && cpuChart.data.datasets[0].data.length == 9) {
+						cpuChart.data.labels.shift();
+						memChart.data.labels.shift();
+						cpuChart.data.datasets[0].data.shift();
+						memChart.data.datasets[0].data.shift();
+					}
+            let time = data.medicao_data 
+            time = time.slice(0,10)     
+					 cpuChart.data.labels.push(data.medicao_hora);
+					memChart.data.labels.push(data.medicao_hora);
+                    
+					
+					//let barTemp = new ldBar('#temperatura');
+				   // let barUmid = new ldBar('#umidade');
+					//barTemp.set(data.temperatura);
+					//barUmid.set(data.umidade);
+          cpuChart.data.datasets[0].data.push(parseFloat(data.cpu_uso));
+         //cpuChart.data.datasets[0].data.labels.push(time)
+					memChart.data.datasets[0].data.push(parseFloat(data.mem_uso));
+					
+					cpuChart.update();
+					memChart.update();
+				//	alerta(data);
+					
+					
+				});
+			}).catch(function (err) {
+				console.log(err);
+			});
+		}
+			get_data();
+		
+		setInterval(() => {			
+			get_data();
+		}, 3000);
+
+  </script>
+
+
+
+
+<%- include('../footerLayout.ejs')%>

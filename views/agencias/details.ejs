@@ -16,7 +16,7 @@
       <div class="card-body">
       <h5 class="card-title">Informações:</h5>
       <p class="card-text">          
-          Agencia Número: <%= agencias[0].agencia_nn%> <br>
+          Número da Agência: <%= agencias[0].agencia_nn%> <br>
           Endereço: <%= agencias[0].agencia_end%> &nbsp; N°: <%= agencias[0].agencia_end_nn%><br>
           Cidade: <%= agencias[0].agencia_cid%> <br>
           Estado: <%= agencias[0].agencia_est%> <br>
@@ -54,12 +54,12 @@
                     <form action="/caixas/details/<%= data.caixaId %>" method="GET"> 
                         
                         <label><b style="color: beige;">Número Serial:</b></label>
-                                       <label><%=data.caixaId%></label>
+                                       <label><%=data.caixa_nn_serial%></label>
                                         <br> 
                       
                         <label><b style="color: beige;">Configurado ?:</b></label>
-                                          <% if(data.configurado == 1){%>
-                                            <label>SIM></label>
+                                          <% if(data.caixa_configurado == 1){%>
+                                            <label>Sim</label>
                                             <%}else{%>
                                               <label>Não</label>
                                               <%}%>
@@ -70,8 +70,8 @@
                     
                         <br>
                        
-                        <button type="submit" class="btn btn-info"  style="position: absolute; bottom: 1.25em; right: 1.25em; color: azure" class="float-right btn waves-effect waves-light azul float-right">Detalhes
-                        </button>
+                        <a href="/caixas/details/<%= data.caixa_id%> " class="btn btn-info"  style="position: absolute; bottom: 1.25em; right: 1.25em; color: azure" class="float-right btn waves-effect waves-light azul float-right">Detalhes
+                        </a>
                     
                     </form> 
                 </p>

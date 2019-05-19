@@ -35,18 +35,20 @@ var router = express.Router();
       console.log(err);
     })
 
+  });
+
 
     //CREATE GET
   router.get('/details/:id',  function (req, res) {
     let caixa_id = req.params.id
 
-    global.conn.request().query`select * from where caixaId = ${caixa_id}; `
+    global.conn.request().query`select * from caixa as cx join cpu as cp on cx.caixa_id = cp.fk_caixa join memoria as mem on cx.caixa_id = mem.fk_caixa join os as os on cx.caixa_id = os.fk_caixa join disco as disco on cx.caixa_id = disco.fk_caixa where caixa_id = ${caixa_id}; `
       .then(result => {
 
         
-          // res.render('caixas/details', { caixa: result.recordset});
+          res.render('caixas/details', {caixa: result.recordset});
 
-          res.json({agengias: result.recordset})
+          // res.json({agengias: result.recordset})
   
       }).catch(err => {
         console.log(err);
@@ -56,10 +58,35 @@ var router = express.Router();
 
     // res.render('agencias/create',{foi:"ae"})
 
-    res.render('caixas/create',{agencia_id:agencia_id})
+    // res.render('caixas/create',{agencia_id:agencia_id})
 
 });
-  
+
+
+router.get('/medicao/:id',  function (req, res) {
+  let caixa_id = req.params.id
+
+  console.log(caixa_id)
+
+  global.conn.request().query`select Top(1) * from medicao where fk_caixa = ${caixa_id} order by medicao_id desc; `
+    .then(result => {
+
+      
+        // res.render('caixas/details', {caixa: result.recordset});
+
+        res.json(result.recordset[0])
+
+    }).catch(err => {
+      console.log(err);
+    })
+  // if (req.statusCode == 302){
+
+
+  // res.render('agencias/create',{foi:"ae"})
+
+  // res.render('caixas/create',{agencia_id:agencia_id})
+
+});
 
     // if (req.statusCode == 302){
     //     res.json({certo:"ok beleza"})
@@ -69,7 +96,7 @@ var router = express.Router();
 
     // res.render('caixas/create',{agencia:agenciaId})
 
-});
+
 
  
 

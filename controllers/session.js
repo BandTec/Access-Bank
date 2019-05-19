@@ -22,6 +22,10 @@ router.post('/login',
   function (req, res) {
     res.render('dashboard');
   });
+router.get('/dashboard',(req,res)=>{
+
+    res.render('dashboard')
+});
 
   //Desloga do sistema
 router.get('/logout', (req, res)=>{
