@@ -369,7 +369,7 @@ var osChart = new Chart(ctx, {
   //Obtem medição
 
     function get_data() {
-			fetch('/caixas/medicao/1',{method:'get'}).then(function (response) {
+			fetch('/caixas/medicao/<%=caixa[0].caixa_id%>',{method:'get'}).then(function (response) {
 				response.json().then(function (data) {
 					if (cpuChart.data.labels.length == 9 && cpuChart.data.datasets[0].data.length == 9) {
 						cpuChart.data.labels.shift();

@@ -28,8 +28,11 @@ router.get('/',  function (req, res) {
 
     global.conn.request().query`select * from agencia as ag left join caixa as cx on ag.agencia_id = cx.fk_agencia where agencia_id = ${agencia_id} ; `
       .then(result => {
+        
+        console.log(result.recordset[0].caixa_id);
 
         if (req.query.success)
+           
             res.render('agencias/details', { agencias: result.recordset, mensagem: 'Caixa cadastrado com Sucesso!' });
         else
             res.render('agencias/details', { agencias: result.recordset, mensagem: null });

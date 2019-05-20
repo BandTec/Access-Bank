@@ -45,7 +45,7 @@ var router = express.Router();
     global.conn.request().query`select * from caixa as cx join cpu as cp on cx.caixa_id = cp.fk_caixa join memoria as mem on cx.caixa_id = mem.fk_caixa join os as os on cx.caixa_id = os.fk_caixa join disco as disco on cx.caixa_id = disco.fk_caixa where caixa_id = ${caixa_id}; `
       .then(result => {
 
-        
+       
           res.render('caixas/details', {caixa: result.recordset});
 
           // res.json({agengias: result.recordset})

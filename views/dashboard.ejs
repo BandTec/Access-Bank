@@ -113,7 +113,252 @@
              
 
  </div>
+ <script>
+  
+    var map;
+    function initMap(lat, lng) {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -23.5521232, lng: -46.6375192 },
+        zoom: 10,
+        styles: [
+        {
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#212121"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#212121"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.country",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.land_parcel",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.locality",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#bdbdbd"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#181818"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#616161"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#1b1b1b"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#2c2c2c"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#8a8a8a"
+            }
+          ]
+        },
+        {
+          "featureType": "road.arterial",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#373737"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#3c3c3c"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway.controlled_access",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#4e4e4e"
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#616161"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#3d3d3d"
+            }
+          ]
+        }
+      ]
 
+      });
+
+      
+      function setZona(lat, lng){
+        map.setCenter({lat: lat, lng: lng});
+        map.setZoom(12);
+
+      }
+      
+
+      
+      
+    var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
+    makers.forEach((item, index)=>{
+
+        var marker = new google.maps.Marker({position: item, map: map});
+    })
+
+    var geocoder = new google.maps.Geocoder();
+    geocodeAddress(geocoder,map)
+    
+    }
+
+    function setZona(lat,lng){
+        
+        map.setCenter({lat:lat,lng:lng})
+        map.setZoom(12);
+    }
+
+    
+
+    function geocodeAddress(geocoder, map) {
+
+      let address = "Rua Marechal Renato Paquet,06, 03959010"
+   
+      geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+              console.log(results[0].geometry.location.lat())
+
+              var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+              });
+  
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    }
+
+ 
+  </script>
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
@@ -144,6 +389,28 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
+      onClick: () => {
+        let evento = this.myChart.chart.getElementAtEvent(event);
+       
+        if (evento[0]._index == 0){
+
+          setZona(-23.480278,-46.670833);
+
+        }
+        if(evento[0]._index == 1){
+
+          setZona(-23.654167, -46.659167)
+        }
+        if(evento[0]._index == 2){
+
+          setZona(-23.533889, -46.503333)
+        }
+        if(evento[0]._index == 3){
+
+          setZona(-23.571944, -46.700833)
+        }
+        
+   },
         scales: {
             yAxes: [{
                 ticks: {
@@ -216,211 +483,7 @@ xAxes: [{
 );
 </script>
 
-<script>
-        var map;
-        function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -23.5521232, lng: -46.6375192 },
-            zoom: 10,
-            styles: [
-            {
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#212121"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.icon",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#757575"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#212121"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#757575"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.country",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#9e9e9e"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.land_parcel",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.locality",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#bdbdbd"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#757575"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#181818"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#616161"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#1b1b1b"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "elementType": "geometry.fill",
-              "stylers": [
-                {
-                  "color": "#2c2c2c"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#8a8a8a"
-                }
-              ]
-            },
-            {
-              "featureType": "road.arterial",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#373737"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#3c3c3c"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway.controlled_access",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#4e4e4e"
-                }
-              ]
-            },
-            {
-              "featureType": "road.local",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#616161"
-                }
-              ]
-            },
-            {
-              "featureType": "transit",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#757575"
-                }
-              ]
-            },
-            {
-              "featureType": "water",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#000000"
-                }
-              ]
-            },
-            {
-              "featureType": "water",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#3d3d3d"
-                }
-              ]
-            }
-          ]
 
-          });
-
-          
-        var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
-        makers.forEach((item, index)=>{
-
-            var marker = new google.maps.Marker({position: item, map: map});
-        })
-
-        
-        }
-      </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYXLzq0gYARRSJ7b97GVqH5G2COSZRH70&callback=initMap"
       async defer></script>
   

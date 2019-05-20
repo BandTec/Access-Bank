@@ -41,9 +41,10 @@
 <br><br>
 
 <div class="row">
+ 
     <!-- Aqui é feito o loop e vai listando as incubadoras-->
     <% for(data of agencias){ %>
-
+      <% if(data.caixa_id != null && data.caixa_configurado == 1){%>
     <div class="col-lg-4 col-md-6 col-sm-6 d-flex align-items-stretch">
         <div class="card" style="min-width: 100%; margin-bottom: 6px">
             <div class="card-body">
@@ -78,7 +79,8 @@
             </div>
         </div>
     </div>
-
+    
+    <%}%>
     <%}%>
   </div>
 
