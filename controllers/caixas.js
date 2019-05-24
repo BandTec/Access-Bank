@@ -63,6 +63,7 @@ var router = express.Router();
 });
 
 
+//Obtem dados
 router.get('/medicao/:id',  function (req, res) {
   let caixa_id = req.params.id
 
@@ -71,30 +72,17 @@ router.get('/medicao/:id',  function (req, res) {
   global.conn.request().query`select Top(1) * from medicao where fk_caixa = ${caixa_id} order by medicao_id desc; `
     .then(result => {
 
-      
-        // res.render('caixas/details', {caixa: result.recordset});
+    
 
         res.json(result.recordset[0])
 
     }).catch(err => {
       console.log(err);
     })
-  // if (req.statusCode == 302){
-
-
-  // res.render('agencias/create',{foi:"ae"})
-
-  // res.render('caixas/create',{agencia_id:agencia_id})
+ 
 
 });
 
-    // if (req.statusCode == 302){
-    //     res.json({certo:"ok beleza"})
-    // }
-
-    // res.render('agencias/create',{foi:"ae"})
-
-    // res.render('caixas/create',{agencia:agenciaId})
 
 
 
