@@ -1,7 +1,7 @@
 const config = {
    
     user: 'accessbank',
-    password: 'Access@bank2012',
+    password: '',
     server: 'accessbankb.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
     database: 'accessbank',
     options: {

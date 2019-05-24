@@ -310,25 +310,40 @@
       });
 
       
-      function setZona(lat, lng){
-        map.setCenter({lat: lat, lng: lng});
-        map.setZoom(12);
-
-      }
+  
       
-
+     
       
       
-    var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
-    makers.forEach((item, index)=>{
+   
 
-        var marker = new google.maps.Marker({position: item, map: map});
-    })
-
-    var geocoder = new google.maps.Geocoder();
-    geocodeAddress(geocoder,map)
+    //var geocoder = new google.maps.Geocoder();
+    //get_data(geocoder,map)
     
     }
+
+
+    //function get_data(geocoder, map) {
+      //fetch('/incidentes/',{method:'get'}).then(function (response) {
+        //response.json().then(function (data) {
+
+          //data.forEach((incidente)=>{
+
+            //  console.log(incidente.agencia_end)
+
+          //})
+         
+          //var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
+         // makers.forEach((item, index)=>{
+      
+           //   var marker = new google.maps.Marker({position: item, map: map});
+         // })
+          
+        //});
+      //}).catch(function (err) {
+        //console.log(err);
+     // });
+    //}
 
     function setZona(lat,lng){
         
@@ -338,7 +353,7 @@
 
     
 
-    function geocodeAddress(geocoder, map) {
+    function geocodeAddress(geocoder, map, address) {
 
       let address = "Rua Marechal Renato Paquet,06, 03959010"
    
@@ -451,6 +466,23 @@ var myPieChart = new Chart(ctx, {
     }],
   },
   options: {
+    onClick: () => {
+      let evento = this.myPieChart.chart.getElementAtEvent(event);
+     
+      if (evento[0]._index == 0){
+
+       
+
+      }
+      if(evento[0]._index == 1){
+
+        
+      }
+      if(evento[0]._index == 2){
+
+        
+      }
+     
     maintainAspectRatio: false,
     tooltips: {
       backgroundColor: "rgb(255,255,255)",

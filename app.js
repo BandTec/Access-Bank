@@ -12,6 +12,7 @@ const agenciaRouter = require('./controllers/agencias');
 const caixaRouter = require('./controllers/caixas');
 const medicaoRouter = require('./controllers/medicao');
 const recemNasc = require('./controllers/recemNasc');
+const incidentesRouter = require('./controllers/incidentes');
 
 const app = express();
 app.use(cors());
@@ -41,6 +42,7 @@ app.use('/agencias', agenciaRouter);
 app.use('/caixas', caixaRouter);
 app.use('/medicao', medicaoRouter);
 app.use('/recemNasc', recemNasc);
+app.use('/incidentes', incidentesRouter);
 
 
 // catch 404 and forward to error handler
