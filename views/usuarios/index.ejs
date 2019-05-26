@@ -14,13 +14,14 @@
   </div>
 <%}%>
 
-<p> <a href="/users/create"> <i class="icon-plus-circled"></i>&ensp;Adicionar Novo Usuário</a> </p>           
+<a class="btn btn-primary" href="/users/create"> Adicionar Novo Usuário</a> 
+<br>   <br>     
 
 <div class="table-responsive-sm">
     <!-- Aqui é feito o loop e vai listando os usuários-->
     
-       <table class="table table-striped">
-            <thead style="background:#2d3e50; color: whitesmoke">
+       <table class="table table-striped table-dark">
+            <thead >
               <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Email</th>
@@ -32,9 +33,9 @@
        
        <% for(data of usuarios){ %>
               <tr>
-                <th scope="row"><%=data.idUsuario %></th> 
+                <th scope="row"><%=data.usuarioid %></th> 
                 <td><%= data.email %></td>
-                <td><a href="/users/delete/<%=data.idUsuario%>">Deletar</a>
+                <td><a class="btn btn-info"href="/users/delete/<%=data.usuarioid%>">Deletar</a>
                 </td>
               </tr>
           <% } %>                           

@@ -17,7 +17,7 @@
 
 <div class="row">
 <div class="col-xl-8 col-lg-7">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4" >
       <!-- Card Header - Dropdown -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Incidentes áreas</h6>
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="col-xl-4 col-lg-5">
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4" >
           <!-- Card Header - Dropdown -->
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Criticidade de Incidentes Abertos</h6>
@@ -63,7 +63,7 @@
           <!-- Card Body -->
           <div class="card-body">
             <div class="chart-pie pt-4 pb-2">
-              <canvas id="pieChart"></canvas>
+              <canvas id="pieChart" style=" height: auto"></canvas>
             </div>
             <div class="mt-4 text-center small">
               <span class="mr-2">
@@ -80,6 +80,18 @@
         </div>
       </div>
  </div> 
+
+ <div class="row">
+  <div class="col-xl-12 col-lg-12">
+    
+      <b for="">Total Geral:</b>&nbsp <label id="quantidade" style="color: aqua"></label> &nbsp &nbsp|<b for="">Seleções:</b> &nbsp &nbsp 
+    <b for="">Zona:</b>&nbsp <label id="zona" style="color: aqua">Todas</label> &nbsp &nbsp| &nbsp &nbsp 
+    <b for="">Criticidade:</b> &nbsp <label id="criticidade" style="color: aqua">Todas</label> &nbsp &nbsp| &nbsp &nbsp 
+    <b for="">Total por Criticidade:</b>&nbsp <label id="quantidadeCri" style="color: aqua"></label> &nbsp &nbsp| &nbsp &nbsp 
+   
+  </div>
+
+ </div>
 
  <!-- Card Map-->
  <div class="row">
@@ -113,10 +125,11 @@
              
 
  </div>
+
  <script>
   
     var map;
-    function initMap(lat, lng) {
+    function initMap(){
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -23.5521232, lng: -46.6375192 },
         zoom: 10,
@@ -307,70 +320,154 @@
         }
       ]
 
+
+
       });
 
       
   
       
+      var geocoder = new google.maps.Geocoder();
+    get_data(geocoder,map)
      
-      
-      
-   
-
-    //var geocoder = new google.maps.Geocoder();
-    //get_data(geocoder,map)
-    
     }
 
-
-    //function get_data(geocoder, map) {
-      //fetch('/incidentes/',{method:'get'}).then(function (response) {
-        //response.json().then(function (data) {
-
-          //data.forEach((incidente)=>{
-
-            //  console.log(incidente.agencia_end)
-
-          //})
-         
-          //var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
-         // makers.forEach((item, index)=>{
-      
-           //   var marker = new google.maps.Marker({position: item, map: map});
-         // })
-          
-        //});
-      //}).catch(function (err) {
-        //console.log(err);
-     // });
-    //}
-
+    var geocoderg;
+    var mapg;
+    
+   
     function setZona(lat,lng){
-        
+      
+      map.setZoom(10);
+      
+      setTimeout(()=>{
+        zoon = true;
         map.setCenter({lat:lat,lng:lng})
         map.setZoom(12);
-    }
+      }, 1000)
+        
+     
 
     
+    
+    }
 
-    function geocodeAddress(geocoder, map, address) {
+    var markers = []
 
-      let address = "Rua Marechal Renato Paquet,06, 03959010"
+    function removeAllMarker() {
+      for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+    }
+
+    function getCriticidade(cri){
+        
+      fetch('/incidentes/criticidade/'+cri,{method:'get'}).then(function (response) {
+        response.json().then(function (data) {
+
+          removeAllMarker();
+
+          //geocodeAddress(geocoder, map, data[1].agencia_end)
+
+          document.getElementById('quantidadeCri').innerHTML = data.length;
+
+         data.forEach((incidente)=>{
+
+          
+             geocodeAddress(geocoderg,mapg,incidente.agencia_end, incidente.agencia_id)
+              
+             
+          })
+         
+         // var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
+         //makers.forEach((item, index)=>{
+      
+           //   var marker = new google.maps.Marker({position: item, map: map});
+          //})
+          
+        });
+      }).catch(function (err) {
+        console.log(err);
+      });
+
+    
+    
+    }
+
+
+    var firstLoad = true;
+
+    function get_data(geocoder, map) {
+      fetch('/incidentes/',{method:'get'}).then(function (response) {
+        response.json().then(function (data) {
+
+          
+          geocoderg = geocoder;
+          mapg = map;
+         
+
+
+          document.getElementById('quantidade').innerHTML = data.length;
+          document.getElementById('quantidadeCri').innerHTML = data.length;
+          //geocodeAddress(geocoder, map, data[1].agencia_end)
+
+         data.forEach((incidente)=>{
+              
+         
+          
+             geocodeAddress(geocoderg,mapg,incidente.agencia_end+","+incidente.agencia_end_nn, incidente.fk_agencia)
+              
+             
+          })
+         
+         // var makers = [{lat: -23.6815314, lng: -46.8755016},{lat: -23.5521232, lng: -46.6375192 }]
+         //makers.forEach((item, index)=>{
+      
+           //   var marker = new google.maps.Marker({position: item, map: map});
+          //})
+          
+        });
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+
+   
+    
+    
+
+    function geocodeAddress(geocoder, map, address, agenciaId) {
+
+      //address = "Rua Marechal Renato Paquet,06, 03959010" -->
    
       geocoder.geocode({'address': address}, function(results, status) {
-        if (status === 'OK') {
-              console.log(results[0].geometry.location.lat())
-
+        if (status === 'OK'){
+                                
               var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location
               });
+
+              marker.addListener('click', function() {
+                window.location.href = "/agencias/details/"+agenciaId;
+              });
+      
+              markers.push(marker)
   
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
     }
+
+   
+
+   
+
+
+
+    
+   
 
  
   </script>
@@ -410,19 +507,28 @@ var myChart = new Chart(ctx, {
         if (evento[0]._index == 0){
 
           setZona(-23.480278,-46.670833);
+          document.getElementById('zona').innerHTML = [];
+          document.getElementById('zona').innerHTML = "Norte";
 
         }
         if(evento[0]._index == 1){
 
           setZona(-23.654167, -46.659167)
+          document.getElementById('zona').innerHTML = [];
+          document.getElementById('zona').innerHTML = "Sul";
         }
         if(evento[0]._index == 2){
 
           setZona(-23.533889, -46.503333)
+          document.getElementById('zona').innerHTML = [];
+          document.getElementById('zona').innerHTML = "Leste";
         }
         if(evento[0]._index == 3){
 
           setZona(-23.571944, -46.700833)
+
+          document.getElementById('zona').innerHTML = [];
+          document.getElementById('zona').innerHTML = "Oeste";
         }
         
    },
@@ -471,18 +577,25 @@ var myPieChart = new Chart(ctx, {
      
       if (evento[0]._index == 0){
 
-       
+       getCriticidade(3)
+       document.getElementById('criticidade').innerHTML = [];
+        document.getElementById('criticidade').innerHTML = "High";
 
       }
       if(evento[0]._index == 1){
 
+        getCriticidade(2)
+        document.getElementById('criticidade').innerHTML = [];
+        document.getElementById('criticidade').innerHTML = "Medium";
         
       }
       if(evento[0]._index == 2){
 
-        
+        getCriticidade(1)
+        document.getElementById('criticidade').innerHTML = [];
+        document.getElementById('criticidade').innerHTML = "Low";
       }
-     
+    },     
     maintainAspectRatio: false,
     tooltips: {
       backgroundColor: "rgb(255,255,255)",

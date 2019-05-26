@@ -13,6 +13,7 @@ const caixaRouter = require('./controllers/caixas');
 const medicaoRouter = require('./controllers/medicao');
 const recemNasc = require('./controllers/recemNasc');
 const incidentesRouter = require('./controllers/incidentes');
+const indexRouter = require('./controllers/index');
 
 const app = express();
 app.use(cors());
@@ -36,13 +37,14 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', sessionRouter);
+app.use('/session', sessionRouter);
 app.use('/users', usersRouter);
 app.use('/agencias', agenciaRouter);
 app.use('/caixas', caixaRouter);
 app.use('/medicao', medicaoRouter);
 app.use('/recemNasc', recemNasc);
 app.use('/incidentes', incidentesRouter);
+app.use('/', indexRouter);
 
 
 // catch 404 and forward to error handler

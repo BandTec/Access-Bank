@@ -7,7 +7,7 @@ const cryptr = new Cryptr('2012');
 
 router.get('/', function (req, res) {
 
-    global.conn.request().query`select idUsuario, nome, email from usuario`
+    global.conn.request().query`select usuarioid, nome, email from usuario`
         .then((result) => {
 
             if (req.query.successCreate)
@@ -72,7 +72,7 @@ router.post('/create', function (req, res, next) {
 
     let email = req.body.email;
 
-    global.conn.request().query`insert into usuario values(${nome}, ${senha},${email})`
+    global.conn.request().query`insert into usuario values(${email},${senha},${nome})`
         .then(() => {
             res.redirect('/users?successCreate=true')
 
@@ -88,7 +88,7 @@ router.get('/delete/:id', function (req, res) {
 
     let id = req.params.id;
 
-    global.conn.request().query`delete from usuario where idUsuario = ${id}`
+    global.conn.request().query`delete from usuario where usuarioId = ${id}`
         .then((result) => {
 
             res.redirect('/users/');

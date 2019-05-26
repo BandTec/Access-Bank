@@ -30,7 +30,7 @@ router.get('/dashboard',(req,res)=>{
   //Desloga do sistema
 router.get('/logout', (req, res)=>{
   req.session.destroy(function (err) {
-    res.redirect('/login'); 
+    res.redirect('/session/login'); 
   });
 
 })

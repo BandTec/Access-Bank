@@ -75,7 +75,7 @@
 
 <!-- CPU-->
 <div class="col-xl-7 col-lg-7">
-  <div class="card shadow mb-4">
+  <div id="cardCpu" class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-primary">Uso: <%=caixa[0].cpu_nome%></h6>
@@ -364,7 +364,7 @@ var osChart = new Chart(ctx, {
 });
 
 
-
+  var simulAlert = true
   
   //Obtem medição
 
@@ -389,8 +389,24 @@ var osChart = new Chart(ctx, {
 					//let barTemp = new ldBar('#temperatura');
 				   // let barUmid = new ldBar('#umidade');
 					//barTemp.set(data.temperatura);
-					//barUmid.set(data.umidade);
+          //barUmid.set(data.umidade);
+          
+          if('<%=caixa[0].incidente_id%>'){
+            cpuChart.data.datasets[0].data.push(parseFloat(100));
+
+            if(simulAlert){
+            setInterval(()=>{
+							$("#cardCpu").fadeOut(200);
+							$("#cardCpu").fadeIn(200);
+
+							
+            },700);
+            simulAlert = false
+          }
+          }
+          else{
           cpuChart.data.datasets[0].data.push(parseFloat(data.cpu_uso));
+          }
          //cpuChart.data.datasets[0].data.labels.push(time)
 					memChart.data.datasets[0].data.push(parseFloat(data.mem_uso));
           let discoTotal = '<%=caixa[0].disco_tamanho%>'
@@ -399,7 +415,6 @@ var osChart = new Chart(ctx, {
           discoTotal = parseInt(discoTotal.slice(0,3))
           let discoUsado = discoTotal - discoLivre;
           
-          console.log(discoTotal)
           discoChart.data.datasets[0].data = []
          discoChart.data.datasets[0].data.push(parseFloat(discoLivre));
           discoChart.data.datasets[0].data.push(parseFloat(discoUsado));

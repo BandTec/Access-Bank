@@ -26,7 +26,7 @@ router.get('/',  function (req, res) {
 
     
 
-    global.conn.request().query`select * from agencia as ag left join caixa as cx on ag.agencia_id = cx.fk_agencia where agencia_id = ${agencia_id} ; `
+    global.conn.request().query`select * from agencia as ag left join caixa as cx on ag.agencia_id = cx.fk_agencia left join incidente as inc on inc.fk_caixa = cx.caixa_id where agencia_id = ${agencia_id} ; `
       .then(result => {
         
         

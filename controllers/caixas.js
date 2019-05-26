@@ -42,7 +42,7 @@ var router = express.Router();
   router.get('/details/:id',  function (req, res) {
     let caixa_id = req.params.id
 
-    global.conn.request().query`select * from caixa as cx join cpu as cp on cx.caixa_id = cp.fk_caixa join memoria as mem on cx.caixa_id = mem.fk_caixa join os as os on cx.caixa_id = os.fk_caixa join disco as disco on cx.caixa_id = disco.fk_caixa where caixa_id = ${caixa_id}; `
+    global.conn.request().query`select * from caixa as cx join cpu as cp on cx.caixa_id = cp.fk_caixa join memoria as mem on cx.caixa_id = mem.fk_caixa join os as os on cx.caixa_id = os.fk_caixa join disco as disco on cx.caixa_id = disco.fk_caixa left join incidente as inc on inc.fk_caixa = cx.caixa_id where caixa_id = ${caixa_id}; `
       .then(result => {
 
        
